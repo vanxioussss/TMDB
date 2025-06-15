@@ -1,7 +1,7 @@
 package com.tmbd.network.service
 
-import com.tmbd.network.dto.MovieDetailResponse
-import com.tmbd.network.dto.PageResponse
+import com.tmbd.network.dto.MovieDetailDto
+import com.tmbd.network.dto.PageDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -22,7 +22,7 @@ class MovieDbApiService(
      * @param pageNumber The page number to retrieve.
      * @param timeWindow The time window for trending movies, default is "day".
      */
-    suspend fun getTrendingMovies(pageNumber: Int, timeWindow: String = "day"): PageResponse =
+    suspend fun getTrendingMovies(pageNumber: Int, timeWindow: String = "day"): PageDto =
         fetchData("trending/movie/$timeWindow?page=$pageNumber")
 
     /**
@@ -31,7 +31,7 @@ class MovieDbApiService(
      * @param query The search query string.
      * @param pageNumber The page number to retrieve.
      */
-    suspend fun searchMovies(query: String, pageNumber: Int): PageResponse =
+    suspend fun searchMovies(query: String, pageNumber: Int): PageDto =
         fetchData("search/movie?query=$query&page=$pageNumber")
 
     /**
@@ -39,7 +39,7 @@ class MovieDbApiService(
      *
      * @param movieId The ID of the movie to retrieve details for.
      */
-    suspend fun getMovieDetails(movieId: Long): MovieDetailResponse =
+    suspend fun getMovieDetails(movieId: Long): MovieDetailDto =
         fetchMovie("$movieId")
 
     private suspend inline fun <reified T> fetchMovie(suffix: String): T =

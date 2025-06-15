@@ -19,3 +19,4 @@ rootProject.name = "TMBD"
 include(":androidApp")
 include(":core:network")
 include(":core:database")
+include(":core:model")

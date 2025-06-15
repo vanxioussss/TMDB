@@ -10,11 +10,11 @@ import kotlinx.serialization.Serializable
  * Represents a paginated response from the MovieDB API.
  */
 @Serializable
-data class PageResponse(
+data class PageDto(
     val page: Int,
     @SerialName("total_results")
     val totalResults: Int,
     @SerialName("total_pages")
     val totalPages: Int,
-    val results: List<MovieResponse> = emptyList(),
+    val results: List<MovieDto> = emptyList(),
 )
