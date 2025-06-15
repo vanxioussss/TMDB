@@ -17,5 +17,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "TMBD"
 include(":androidApp")
-include(":shared")
 include(":core:network")
+include(":core:database")
