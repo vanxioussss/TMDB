@@ -10,14 +10,14 @@ import kotlinx.serialization.Serializable
  * Represents a movie detail response from the MovieDB API.
  */
 @Serializable
-data class MovieDetailResponse(
+data class MovieDetailDto(
     val adult: Boolean,
     @SerialName("backdrop_path")
     val backdropPath: String,
     @SerialName("belongs_to_collection")
-    val belongsToCollection: BelongsToCollection,
+    val belongsToCollectionDto: BelongsToCollectionDto,
     val budget: Long,
-    val genres: List<Genre>,
+    val genreDtos: List<GenreDto>,
     val homepage: String,
     val id: Long,
     @SerialName("imdb_id")
@@ -33,15 +33,15 @@ data class MovieDetailResponse(
     @SerialName("poster_path")
     val posterPath: String,
     @SerialName("production_companies")
-    val productionCompanies: List<ProductionCompany>,
+    val productionCompanies: List<ProductionCompanyDto>,
     @SerialName("production_countries")
-    val productionCountries: List<ProductionCountry>,
+    val productionCountries: List<ProductionCountryDto>,
     @SerialName("release_date")
     val releaseDate: String,
     val revenue: Long,
     val runtime: Long,
     @SerialName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage>,
+    val spokenLanguageDtos: List<SpokenLanguageDto>,
     val status: String,
     val tagline: String,
     val title: String,
@@ -53,7 +53,7 @@ data class MovieDetailResponse(
 )
 
 @Serializable
-data class BelongsToCollection(
+data class BelongsToCollectionDto(
     val id: Long,
     val name: String,
     @SerialName("poster_path")
@@ -63,13 +63,13 @@ data class BelongsToCollection(
 )
 
 @Serializable
-data class Genre(
+data class GenreDto(
     val id: Long,
     val name: String,
 )
 
 @Serializable
-data class ProductionCompany(
+data class ProductionCompanyDto(
     val id: Long,
     @SerialName("logo_path")
     val logoPath: String,
@@ -79,14 +79,14 @@ data class ProductionCompany(
 )
 
 @Serializable
-data class ProductionCountry(
+data class ProductionCountryDto(
     @SerialName("iso_3166_1")
     val iso31661: String,
     val name: String,
 )
 
 @Serializable
-data class SpokenLanguage(
+data class SpokenLanguageDto(
     @SerialName("english_name")
     val englishName: String,
     @SerialName("iso_639_1")

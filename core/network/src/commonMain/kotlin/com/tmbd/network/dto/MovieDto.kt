@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * Represents a movie response from the MovieDB API.
  */
 @Serializable
-data class MovieResponse(
+data class MovieDto(
     val id: Long,
     @SerialName("backdrop_path")
     val backdropPath: String?,

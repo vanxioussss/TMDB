@@ -8,6 +8,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(projects.core.model)
+
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.koin.core)
                 implementation(libs.room.runtime)
