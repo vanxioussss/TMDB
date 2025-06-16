@@ -1,17 +1,17 @@
 package com.tmdb.data.repository
 
+import app.cash.paging.PagingSource
 import com.tmbd.network.mapper.toModel
 import com.tmbd.network.service.MovieDbApiService
 import com.tmdb.common.resource.Resource
+import com.tmdb.data.datasource.MoviePagingSource
 import com.tmdb.database.dao.TrendingMoviesDao
 import com.tmdb.database.mapper.toModelList
 import com.tmdb.database.mapper.toTrendingMovieEntityList
 import com.tmdb.domain.repository.MovieRepository
 import com.tmdb.model.Movie
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -28,26 +28,9 @@ class MovieRepositoryImpl(
     private val movieDbApiService: MovieDbApiService,
     private val trendingMoviesDao: TrendingMoviesDao
 ) : MovieRepository {
-    override suspend fun searchMovieBy(query: String, page: Int): Flow<Resource<List<Movie>>> =
-        flow {
-            emit(Resource.Loading)
-
-            when (val response = movieDbApiService.searchMovies(query, page)) {
-                is Resource.Success -> {
-                    val movies = response.body.results.toModel()
-                    emit(Resource.Success(movies))
-                }
-
-                is Resource.DataError -> {
-                    emit(Resource.DataError(response.error))
-                }
-
-                is Resource.Loading -> emit(Resource.Loading)
-                is Resource.ServerError -> {
-                    emit(Resource.ServerError(response.error))
-                }
-            }
-        }.flowOn(Dispatchers.IO)
+    override fun searchMovieBy(query: String, page: Int): PagingSource<Int, Movie> {
+        return MoviePagingSource(movieDbApiService, query)
+    }
 
     override suspend fun getTrendingMovie(): Flow<Resource<List<Movie>>> = flow {
         emit(Resource.Loading)

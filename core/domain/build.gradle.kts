@@ -14,6 +14,9 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+
+                // Paging
+                implementation(libs.paging.common)
             }
         }
 

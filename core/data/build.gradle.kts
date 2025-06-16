@@ -18,6 +18,9 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+
+                // Paging
+                implementation(libs.paging.common)
             }
         }
 
