@@ -3,11 +3,13 @@ package com.tmbd.network.mapper
 import com.tmbd.network.dto.BelongsToCollectionDto
 import com.tmbd.network.dto.GenreDto
 import com.tmbd.network.dto.MovieDetailDto
+import com.tmbd.network.dto.MovieDto
 import com.tmbd.network.dto.ProductionCompanyDto
 import com.tmbd.network.dto.ProductionCountryDto
 import com.tmbd.network.dto.SpokenLanguageDto
 import com.tmdb.model.BelongsToCollection
 import com.tmdb.model.Genre
+import com.tmdb.model.Movie
 import com.tmdb.model.MovieDetail
 import com.tmdb.model.ProductionCompany
 import com.tmdb.model.ProductionCountry
@@ -19,6 +21,17 @@ import com.tmdb.model.SpokenLanguage
  */
 
 // ---- Dto -> Model Mappers ----
+fun MovieDto.toModel(): Movie {
+    return Movie(
+        id = id,
+        originalTitle = originalTitle,
+        releaseDate = releaseDate,
+        posterPath = posterPath,
+        backdropPath = backdropPath,
+        voteAverage = voteAverage,
+    )
+}
+
 fun MovieDetailDto.toModel(): MovieDetail {
     return MovieDetail(
         id = id,
@@ -83,6 +96,7 @@ fun SpokenLanguageDto.toModel(): SpokenLanguage {
 }
 
 // ---- List Mappers ----
+fun List<MovieDto>.toModel(): List<Movie> = map { it.toModel() }
 
 fun List<GenreDto>.toModel(): List<Genre> = map { it.toModel() }
 
@@ -93,6 +107,14 @@ fun List<ProductionCountryDto>.toModel(): List<ProductionCountry> = map { it.toM
 fun List<SpokenLanguageDto>.toModel(): List<SpokenLanguage> = map { it.toModel() }
 
 // ---- Model -> Dto Mappers ----
+fun Movie.toDto(): MovieDto = MovieDto(
+    id = id,
+    originalTitle = originalTitle,
+    releaseDate = releaseDate ?: "",
+    posterPath = posterPath ?: "",
+    backdropPath = backdropPath ?: "",
+    voteAverage = voteAverage
+)
 
 fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(
     adult = false, // or map if you need it
@@ -155,6 +177,7 @@ fun SpokenLanguage.toDto(): SpokenLanguageDto = SpokenLanguageDto(
 
 
 // ---- List Mappers ----
+fun List<Movie>.toDto(): List<MovieDto> = map { it.toDto() }
 
 fun List<Genre>.toDto(): List<GenreDto> = map { it.toDto() }
 

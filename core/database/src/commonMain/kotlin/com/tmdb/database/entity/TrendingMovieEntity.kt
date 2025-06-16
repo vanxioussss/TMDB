@@ -16,6 +16,6 @@ data class TrendingMovieEntity(
     val releaseDate: String?,
     val posterPath: String?,
     val backdropPath: String?,
-    val voteAverage: Double,
+    val voteAverage: Float,
     val fetchedAt: Long // timestamp in millis
 )
