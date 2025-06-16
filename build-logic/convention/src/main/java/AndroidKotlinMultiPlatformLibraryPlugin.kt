@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 class AndroidKotlinMultiPlatformLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("com.android.application")
+            pluginManager.apply("com.android.library")
             pluginManager.apply("org.jetbrains.kotlin.multiplatform")
 
-            extensions.configure<BaseAppModuleExtension> {
+            extensions.configure<LibraryExtension> {
                 compileSdk = 35
 
                 configureDefaultConfig()

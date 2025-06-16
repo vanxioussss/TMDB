@@ -7,8 +7,10 @@ import com.tmdb.database.entity.MovieDetailsEntity
 import com.tmdb.database.entity.ProductionCompanyEntity
 import com.tmdb.database.entity.ProductionCountryEntity
 import com.tmdb.database.entity.SpokenLanguageEntity
+import com.tmdb.database.entity.TrendingMovieEntity
 import com.tmdb.model.BelongsToCollection
 import com.tmdb.model.Genre
+import com.tmdb.model.Movie
 import com.tmdb.model.MovieDetail
 import com.tmdb.model.ProductionCompany
 import com.tmdb.model.ProductionCountry
@@ -19,6 +21,17 @@ import com.tmdb.model.SpokenLanguage
  * on 16,June,2025
  */
 // ---- Single Entity → Model ----
+fun TrendingMovieEntity.toModel(): Movie {
+    return Movie(
+        id = id,
+        originalTitle = originalTitle,
+        releaseDate = releaseDate ?: "",
+        posterPath = posterPath ?: "",
+        backdropPath = backdropPath ?: "",
+        voteAverage = voteAverage
+    )
+}
+
 fun MovieDetailsEntity.toModel(
     genres: List<Genre> = emptyList(),
     productionCompanies: List<ProductionCompany> = emptyList(),
@@ -85,7 +98,20 @@ fun MovieDetailWithRelations.toModel(): MovieDetail = movie.toModel(
     belongsToCollection = belongsToCollection?.toModel()
 )
 
+fun List<TrendingMovieEntity>.toModelList(): List<Movie> = map { it.toModel() }
+
 // ---- Model → Entity ----
+fun Movie.toEntity(fetchedAt: Long = System.currentTimeMillis()): TrendingMovieEntity =
+    TrendingMovieEntity(
+        id = id,
+        originalTitle = originalTitle,
+        releaseDate = releaseDate,
+        posterPath = posterPath ?: "",
+        backdropPath = backdropPath ?: "",
+        voteAverage = voteAverage ?: 0f,
+        fetchedAt = fetchedAt
+    )
+
 fun MovieDetail.toEntity(): MovieDetailsEntity = MovieDetailsEntity(
     id = id,
     adult = false, // optional
@@ -157,4 +183,8 @@ fun List<ProductionCountry>.toEntityList(movieId: Long): List<ProductionCountryE
 
 fun List<SpokenLanguage>.toEntityList(movieId: Long): List<SpokenLanguageEntity> =
     map { it.toEntity(movieId) }
+
+fun List<Movie>.toTrendingMovieEntityList(
+    fetchedAt: Long = System.currentTimeMillis()
+): List<TrendingMovieEntity> = map { it.toEntity(fetchedAt) }
 

@@ -9,6 +9,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.core.model)
+                implementation(projects.core.common)
 
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.koin.core)
