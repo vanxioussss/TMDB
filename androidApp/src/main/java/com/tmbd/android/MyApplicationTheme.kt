@@ -1,4 +1,4 @@
-package com.vanluong.tmbd.android
+package com.tmbd.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

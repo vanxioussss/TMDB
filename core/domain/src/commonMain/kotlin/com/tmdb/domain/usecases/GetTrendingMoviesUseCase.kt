@@ -11,5 +11,5 @@ import com.tmdb.domain.repository.MovieRepository
 class GetTrendingMoviesUseCase(
     private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke() = movieRepository.getTrendingMovie()
+    operator fun invoke() = movieRepository.getTrendingMovie()
 }
