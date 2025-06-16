@@ -24,6 +24,7 @@ jetbrainsKotlinJvm = "2.1.20"
 room = "2.7.1"
 sqlite = "2.5.1"
 secrets = "2.0.1"
+pagingCommonAndroid = "3.3.6"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -62,11 +63,13 @@ kotlin-test-common = { group = "org.jetbrains.kotlin", name = "kotlin-test-commo
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagingCommon" }
+paging-compose-common = { module = "app.cash.paging:paging-compose-common", version.ref = "pagingCommon" }
 room_runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room_compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
 glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glideCompose" }
+androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "pagingCommonAndroid" }
 
 [bundles]
 test = ["junit", "arc-core-common", "arc-core-runtime", "arc-core-testing", "kotlin-test", "kotlinx-coroutines-test"]
