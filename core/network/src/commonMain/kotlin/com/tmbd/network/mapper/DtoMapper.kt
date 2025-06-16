@@ -4,6 +4,7 @@ import com.tmbd.network.dto.BelongsToCollectionDto
 import com.tmbd.network.dto.GenreDto
 import com.tmbd.network.dto.MovieDetailDto
 import com.tmbd.network.dto.MovieDto
+import com.tmbd.network.dto.PageDto
 import com.tmbd.network.dto.ProductionCompanyDto
 import com.tmbd.network.dto.ProductionCountryDto
 import com.tmbd.network.dto.SpokenLanguageDto
@@ -11,6 +12,7 @@ import com.tmdb.model.BelongsToCollection
 import com.tmdb.model.Genre
 import com.tmdb.model.Movie
 import com.tmdb.model.MovieDetail
+import com.tmdb.model.MoviePageResponse
 import com.tmdb.model.ProductionCompany
 import com.tmdb.model.ProductionCountry
 import com.tmdb.model.SpokenLanguage
@@ -29,6 +31,15 @@ fun MovieDto.toModel(): Movie {
         posterPath = posterPath,
         backdropPath = backdropPath,
         voteAverage = voteAverage,
+    )
+}
+
+fun PageDto.toModel(): MoviePageResponse {
+    return MoviePageResponse(
+        page = page,
+        totalResults = totalResults,
+        totalPages = totalPages,
+        results = results.toModel()
     )
 }
 
@@ -114,6 +125,13 @@ fun Movie.toDto(): MovieDto = MovieDto(
     posterPath = posterPath ?: "",
     backdropPath = backdropPath ?: "",
     voteAverage = voteAverage
+)
+
+fun MoviePageResponse.toDto(): PageDto = PageDto(
+    page = page,
+    totalResults = totalResults,
+    totalPages = totalPages,
+    results = results.toDto()
 )
 
 fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(

@@ -14,3 +14,10 @@ data class Movie(
     val releaseDate: String?,
     val voteAverage: Float?,
 )
+
+data class MoviePageResponse(
+    val page: Int,
+    val totalResults: Int,
+    val totalPages: Int,
+    val results: List<Movie> = emptyList(),
+)

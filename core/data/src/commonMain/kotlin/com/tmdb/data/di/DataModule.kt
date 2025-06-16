@@ -1,6 +1,7 @@
 package com.tmdb.data.di
 
 import com.tmbd.network.di.networkModule
+import com.tmdb.data.datasource.MoviePagingSource
 import com.tmdb.data.repository.MovieRepositoryImpl
 import com.tmdb.database.di.databaseModule
 import com.tmdb.domain.repository.MovieRepository
@@ -20,6 +21,13 @@ val dataModule =
             MovieRepositoryImpl(
                 movieDbApiService = get(),
                 trendingMoviesDao = get(),
+            )
+        }
+
+        factory { (query: String) ->
+            MoviePagingSource(
+                apiService = get(),
+                query = query,
             )
         }
     }
