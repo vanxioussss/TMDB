@@ -1,11 +1,10 @@
-import org.gradle.api.Plugin
-import org.gradle.api.Project
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.vanluong.convention.extensions.configureCompileOptions
 import com.vanluong.convention.extensions.configureDefaultConfig
 import com.vanluong.convention.extensions.configurePlatformTargets
 import com.vanluong.convention.extensions.configureTestOptions
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 

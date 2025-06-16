@@ -1,7 +1,7 @@
 package com.tmdb.data.repository
 
 import app.cash.paging.PagingSource
-import com.tmbd.network.mapper.toModel
+import com.tmbd.network.mapper.toMovieModel
 import com.tmbd.network.service.MovieDbApiService
 import com.tmdb.common.resource.Resource
 import com.tmdb.data.datasource.MoviePagingSource
@@ -12,11 +12,10 @@ import com.tmdb.domain.repository.MovieRepository
 import com.tmdb.model.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import java.time.LocalDate
-import java.time.ZoneId
 
 /**
  * Created by van.luong
@@ -32,7 +31,7 @@ class MovieRepositoryImpl(
         return MoviePagingSource(movieDbApiService, query)
     }
 
-    override suspend fun getTrendingMovie(): Flow<Resource<List<Movie>>> = flow {
+    override fun getTrendingMovie(): Flow<Resource<List<Movie>>> = flow {
         emit(Resource.Loading)
         val latestCacheTime = trendingMoviesDao.getTrendingFetchTimestamp()
         val cacheValid = latestCacheTime?.let { isCacheStillValid(it) } ?: false
@@ -42,7 +41,7 @@ class MovieRepositoryImpl(
         } else {
             when (val newTrendingMovie = movieDbApiService.getTrendingMovies(1, "day")) {
                 is Resource.Success -> {
-                    val movies = newTrendingMovie.body.results.toModel()
+                    val movies = newTrendingMovie.body.results.toMovieModel()
                     trendingMoviesDao.clearTrendingMovies()
                     trendingMoviesDao.insertTrendingMovies(movies.toTrendingMovieEntityList())
                     emit(Resource.Success(movies))
@@ -65,7 +64,7 @@ class MovieRepositoryImpl(
             .toLocalDateTime(TimeZone.currentSystemDefault())
             .date
 
-        val today = LocalDate.now(ZoneId.systemDefault())
-        return cachedDate.equals(today)
+        val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+        return cachedDate == today
     }
 }

@@ -10,8 +10,8 @@ kotlin {
             dependencies {
                 api(projects.core.model)
                 implementation(projects.core.domain)
-                implementation(projects.core.network)
-                implementation(projects.core.database)
+                api(projects.core.network)
+                api(projects.core.database)
                 implementation(projects.core.common)
 
                 implementation(libs.kotlin.stdlib)

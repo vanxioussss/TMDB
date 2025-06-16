@@ -22,14 +22,21 @@ import com.tmdb.model.SpokenLanguage
  * on 16,June,2025
  */
 
+private const val BASE_URL = "https://image.tmdb.org/t/p/w"
+const val BIG_SIZE_IMAGE_ADDRESS = "${BASE_URL}780"
+const val SMALL_SIZE_IMAGE_ADDRESS = "${BASE_URL}300"
+
+private fun String.toSmallImageUrl(): String = SMALL_SIZE_IMAGE_ADDRESS.plus(this)
+private fun String.toBigImageUrl(): String = BIG_SIZE_IMAGE_ADDRESS.plus(this)
+
 // ---- Dto -> Model Mappers ----
 fun MovieDto.toModel(): Movie {
     return Movie(
         id = id,
         originalTitle = originalTitle,
         releaseDate = releaseDate,
-        posterPath = posterPath,
-        backdropPath = backdropPath,
+        posterPath = posterPath?.toSmallImageUrl(),
+        backdropPath = backdropPath?.toBigImageUrl(),
         voteAverage = voteAverage,
     )
 }
@@ -39,7 +46,7 @@ fun PageDto.toModel(): MoviePageResponse {
         page = page,
         totalResults = totalResults,
         totalPages = totalPages,
-        results = results.toModel()
+        results = results.toMovieModel()
     )
 }
 
@@ -50,8 +57,8 @@ fun MovieDetailDto.toModel(): MovieDetail {
         originalTitle = originalTitle,
         overview = overview,
         releaseDate = releaseDate,
-        posterPath = posterPath,
-        backdropPath = backdropPath,
+        posterPath = posterPath.toSmallImageUrl(),
+        backdropPath = backdropPath.toBigImageUrl(),
         voteAverage = voteAverage,
         runtime = runtime,
         homepage = homepage,
@@ -107,15 +114,17 @@ fun SpokenLanguageDto.toModel(): SpokenLanguage {
 }
 
 // ---- List Mappers ----
-fun List<MovieDto>.toModel(): List<Movie> = map { it.toModel() }
+fun List<MovieDto>.toMovieModel(): List<Movie> = map { it.toModel() }
 
-fun List<GenreDto>.toModel(): List<Genre> = map { it.toModel() }
+fun List<GenreDto>.toGenreModel(): List<Genre> = map { it.toModel() }
 
-fun List<ProductionCompanyDto>.toModel(): List<ProductionCompany> = map { it.toModel() }
+fun List<ProductionCompanyDto>.toProductionCompanyModel(): List<ProductionCompany> =
+    map { it.toModel() }
 
-fun List<ProductionCountryDto>.toModel(): List<ProductionCountry> = map { it.toModel() }
+fun List<ProductionCountryDto>.toProductionCountryModel(): List<ProductionCountry> =
+    map { it.toModel() }
 
-fun List<SpokenLanguageDto>.toModel(): List<SpokenLanguage> = map { it.toModel() }
+fun List<SpokenLanguageDto>.toSpokenLanguageModel(): List<SpokenLanguage> = map { it.toModel() }
 
 // ---- Model -> Dto Mappers ----
 fun Movie.toDto(): MovieDto = MovieDto(
@@ -131,7 +140,7 @@ fun MoviePageResponse.toDto(): PageDto = PageDto(
     page = page,
     totalResults = totalResults,
     totalPages = totalPages,
-    results = results.toDto()
+    results = results.toMovieDto()
 )
 
 fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(
@@ -139,7 +148,7 @@ fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(
     backdropPath = backdropPath ?: "",
     belongsToCollectionDto = belongsToCollection?.toDto() ?: BelongsToCollectionDto(0, "", "", ""),
     budget = 0, // or store if needed
-    genreDtos = genres.toDto(),
+    genreDtos = genres.toGenreDto(),
     homepage = homepage ?: "",
     id = id,
     imdbId = imdbId ?: "",
@@ -149,12 +158,12 @@ fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(
     overview = overview ?: "",
     popularity = 0.0, // optional
     posterPath = posterPath ?: "",
-    productionCompanies = productionCompanies.toDto(),
-    productionCountries = productionCountries.toDto(),
+    productionCompanies = productionCompanies.toProductionCompanyDto(),
+    productionCountries = productionCountries.toProductionCountryDto(),
     releaseDate = releaseDate ?: "",
     revenue = 0, // optional
     runtime = runtime ?: 0,
-    spokenLanguageDtos = spokenLanguages.toDto(),
+    spokenLanguageDtos = spokenLanguages.toSpokenLanguageDto(),
     status = status ?: "",
     tagline = tagline ?: "",
     title = title,
@@ -195,12 +204,14 @@ fun SpokenLanguage.toDto(): SpokenLanguageDto = SpokenLanguageDto(
 
 
 // ---- List Mappers ----
-fun List<Movie>.toDto(): List<MovieDto> = map { it.toDto() }
+fun List<Movie>.toMovieDto(): List<MovieDto> = map { it.toDto() }
 
-fun List<Genre>.toDto(): List<GenreDto> = map { it.toDto() }
+fun List<Genre>.toGenreDto(): List<GenreDto> = map { it.toDto() }
 
-fun List<ProductionCompany>.toDto(): List<ProductionCompanyDto> = map { it.toDto() }
+fun List<ProductionCompany>.toProductionCompanyDto(): List<ProductionCompanyDto> =
+    map { it.toDto() }
 
-fun List<ProductionCountry>.toDto(): List<ProductionCountryDto> = map { it.toDto() }
+fun List<ProductionCountry>.toProductionCountryDto(): List<ProductionCountryDto> =
+    map { it.toDto() }
 
-fun List<SpokenLanguage>.toDto(): List<SpokenLanguageDto> = map { it.toDto() }
+fun List<SpokenLanguage>.toSpokenLanguageDto(): List<SpokenLanguageDto> = map { it.toDto() }

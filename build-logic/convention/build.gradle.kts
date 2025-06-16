@@ -28,5 +28,10 @@ gradlePlugin {
             id = libs.plugins.tmdb.kmp.library.get().pluginId
             implementationClass = "AndroidKotlinMultiPlatformLibraryPlugin"
         }
+
+        register("kmpAppPlugin") {
+            id = libs.plugins.tmdb.kmp.app.get().pluginId
+            implementationClass = "AndroidKotlinMultiPlatformAppPlugin"
+        }
     }
 }

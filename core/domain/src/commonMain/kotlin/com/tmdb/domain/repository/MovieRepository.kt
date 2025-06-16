@@ -26,5 +26,5 @@ interface MovieRepository {
      *
      * @return A flow emitting a Resource containing a list of trending movies.
      */
-    suspend fun getTrendingMovie(): Flow<Resource<List<Movie>>>
+    fun getTrendingMovie(): Flow<Resource<List<Movie>>>
 }

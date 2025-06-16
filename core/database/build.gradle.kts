@@ -14,6 +14,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.room.runtime)
                 implementation(libs.sqlite.bundled)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
 
@@ -43,5 +44,8 @@ kotlin {
             }
         }
     }
+}
 
+dependencies {
+    add("kspAndroid", libs.room.compiler)
 }

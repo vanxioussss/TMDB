@@ -174,14 +174,14 @@ fun SpokenLanguage.toEntity(movieId: Long): SpokenLanguageEntity = SpokenLanguag
 
 
 // -- List Mappers for bulk insertion
-fun List<Genre>.toEntityList(movieId: Long): List<GenreEntity> = map { it.toEntity(movieId) }
-fun List<ProductionCompany>.toEntityList(movieId: Long): List<ProductionCompanyEntity> =
+fun List<Genre>.toGenreEntityList(movieId: Long): List<GenreEntity> = map { it.toEntity(movieId) }
+fun List<ProductionCompany>.toProductionCompanyEntityList(movieId: Long): List<ProductionCompanyEntity> =
     map { it.toEntity(movieId) }
 
-fun List<ProductionCountry>.toEntityList(movieId: Long): List<ProductionCountryEntity> =
+fun List<ProductionCountry>.toProductionCountryEntityList(movieId: Long): List<ProductionCountryEntity> =
     map { it.toEntity(movieId) }
 
-fun List<SpokenLanguage>.toEntityList(movieId: Long): List<SpokenLanguageEntity> =
+fun List<SpokenLanguage>.toSpokenLanguageEntityList(movieId: Long): List<SpokenLanguageEntity> =
     map { it.toEntity(movieId) }
 
 fun List<Movie>.toTrendingMovieEntityList(
