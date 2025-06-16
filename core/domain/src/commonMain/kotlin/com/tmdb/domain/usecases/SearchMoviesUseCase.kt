@@ -1,7 +1,7 @@
 package com.tmdb.domain.usecases
 
-import androidx.paging.PagingConfig
 import app.cash.paging.Pager
+import app.cash.paging.PagingConfig
 import com.tmdb.domain.repository.MovieRepository
 
 /**

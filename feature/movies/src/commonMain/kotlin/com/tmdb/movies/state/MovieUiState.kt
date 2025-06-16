@@ -1,6 +1,8 @@
 package com.tmdb.movies.state
 
+import app.cash.paging.PagingData
 import com.tmdb.model.Movie
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by van.luong
@@ -9,14 +11,20 @@ import com.tmdb.model.Movie
  * Represents the UI state for the movie list screen.
  */
 sealed interface MovieUiState {
+
     /**
-     * Represents the success state of the movie list screen.
+     * Represents the state when trending movies are displayed.
      *
-     * @property movies The list of movies to be displayed.
+     * @property data The list of trending movies to be displayed.
      */
-    data class Success(
-        val movies: List<Movie>
-    ) : MovieUiState
+    data class ShowTrending(val data: List<Movie>) : MovieUiState
+
+    /**
+     * Represents the state when search results are displayed.
+     *
+     * @property data The flow of paginated movie data to be displayed.
+     */
+    data class ShowSearch(val data: Flow<PagingData<Movie>>) : MovieUiState
 
     /**
      * Represents the loading state of the movie list screen.

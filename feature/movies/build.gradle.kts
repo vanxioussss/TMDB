@@ -38,6 +38,8 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.bundles.koin)
                 implementation(libs.bundles.ktor)
+                implementation(libs.paging.common)
+                implementation(libs.paging.compose.common)
 
                 implementation(projects.core.common)
                 implementation(projects.core.domain)
