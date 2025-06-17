@@ -57,6 +57,28 @@ https://github.com/user-attachments/assets/6d258c48-9763-4ec6-a3ee-3f1321ce95d5
 
 - 🔑 Secrets Handling — API keys securely handled with local properties.
 
+✅ Extra Points
+---------------
+
+- 📱 **iOS Compatibility (KMP-Ready)**  
+  The shared codebase (business logic, caching, repository) is designed to be fully **iOS-friendly**, using `expect/actual` where required and adhering to Kotlin Multiplatform best practices.  
+  
+- 🧪 **Unit Tests for Cache Validation**  
+  - Unit tests have been written to ensure that **cache invalidation works as expected**, respecting the **24-hour stale time** logic, and that new data is fetched only when necessary. These tests verify both **valid cache scenarios** and **expired cache refreshes**.
+  - Located at: **core/data/commonTest**
+
+- 🖥️ **Simple UI Test for Compose Screens**  
+  A **UI Test** is included for critical flows such as:
+  - Displaying **Trending Movies** list.
+  - Showing **Loading Indicators**.
+  - Displaying **Error Messages** when failures occur.
+  - **Search Query Input** interaction and validation.
+  - Located at: **feature/movies/androidTest**
+
+- ⚠️ **Error Message Handling (Offline/Failed Calls)**  
+  - Gracefully handles **offline mode** or **network failures** with appropriate user-facing error messages.
+  - Differentiates between **network errors**, **server errors**, and **unexpected exceptions**.
+
 🏗️ How to Build
 --------------
 
