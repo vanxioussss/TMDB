@@ -76,7 +76,7 @@ https://github.com/user-attachments/assets/6d258c48-9763-4ec6-a3ee-3f1321ce95d5
 --------------
 
 In case you can't build the project, \
-here is the [Link]
+Check out the [Release](https://github.com/vanxioussss/TMDB/releases/tag/v1.0.0) section.
 
 🛠️ Tech Stack
 --------------
