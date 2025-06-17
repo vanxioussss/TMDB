@@ -13,11 +13,11 @@ import kotlinx.serialization.Serializable
 data class MovieDetailDto(
     val adult: Boolean,
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerialName("belongs_to_collection")
-    val belongsToCollectionDto: BelongsToCollectionDto,
+    val belongsToCollectionDto: BelongsToCollectionDto?,
     val budget: Long,
-    val genreDtos: List<GenreDto>,
+    val genres: List<GenreDto>,
     val homepage: String,
     val id: Long,
     @SerialName("imdb_id")
@@ -31,7 +31,7 @@ data class MovieDetailDto(
     val overview: String,
     val popularity: Double,
     @SerialName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerialName("production_companies")
     val productionCompanies: List<ProductionCompanyDto>,
     @SerialName("production_countries")
@@ -41,7 +41,7 @@ data class MovieDetailDto(
     val revenue: Long,
     val runtime: Long,
     @SerialName("spoken_languages")
-    val spokenLanguageDtos: List<SpokenLanguageDto>,
+    val spokenLanguage: List<SpokenLanguageDto>,
     val status: String,
     val tagline: String,
     val title: String,
@@ -57,9 +57,9 @@ data class BelongsToCollectionDto(
     val id: Long,
     val name: String,
     @SerialName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
 )
 
 @Serializable
@@ -72,7 +72,7 @@ data class GenreDto(
 data class ProductionCompanyDto(
     val id: Long,
     @SerialName("logo_path")
-    val logoPath: String,
+    val logoPath: String?,
     val name: String,
     @SerialName("origin_country")
     val originCountry: String,

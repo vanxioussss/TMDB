@@ -2,6 +2,7 @@ package com.tmdb.movies.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.tmdb.common.resource.Resource
 import com.tmdb.domain.usecases.GetTrendingMoviesUseCase
 import com.tmdb.domain.usecases.SearchMoviesUseCase
@@ -47,7 +48,7 @@ class HomeScreenViewModel(
         .distinctUntilChanged()
         .flatMapLatest { query ->
             if (query.isNotBlank()) {
-                flowOf(MovieUiState.ShowSearch(searchMoviesUseCase(query)))
+                flowOf(MovieUiState.ShowSearch(searchMoviesUseCase(query).cachedIn(viewModelScope)))
             } else {
                 trendingMovies.map { resource ->
                     when (resource) {

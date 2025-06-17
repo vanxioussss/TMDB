@@ -1,6 +1,7 @@
 package com.tmdb.movies.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,12 +35,14 @@ import com.tmdb.ui.AppColorScheme
 @Composable
 fun MovieItem(
     movie: Movie,
+    onMovieClick: (Long) -> Unit,
 ) {
     Row(
         Modifier
             .fillMaxWidth()
             .background(AppColorScheme.Background)
-            .padding(vertical = 8.dp, horizontal = 16.dp),
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+            .clickable { onMovieClick(movie.id) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         val posterUrl = movie.posterPath ?: movie.backdropPath
@@ -95,7 +98,8 @@ fun MovieItemPreview() {
             backdropPath = "/sample_backdrop.jpg",
             posterPath = "/sample_poster.jpg",
             releaseDate = "2025-06-16",
-            voteAverage = 8.5f
-        )
+            voteAverage = 8.5f,
+        ),
+        onMovieClick = {}
     )
 }

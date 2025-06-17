@@ -5,8 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.tmdb.movies.navigation.HomeScreenRoute
-import com.tmdb.movies.navigation.homeScreen
+import com.tmdb.details.ui.MovieDetailScreenRoute
+import com.tmdb.movies.ui.MovieHomeScreenRoute
+import com.tmdb.navigation.HomeScreenRoute
+import com.tmdb.navigation.addDetailsScreen
+import com.tmdb.navigation.addHomeScreen
 
 /**
  * Created by van.luong
@@ -23,6 +26,12 @@ fun NavGraphHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        homeScreen()
+        addHomeScreen {
+            MovieHomeScreenRoute(navController = navController)
+        }
+
+        addDetailsScreen { movieId ->
+            MovieDetailScreenRoute(movieId = movieId, navController = navController)
+        }
     }
 }

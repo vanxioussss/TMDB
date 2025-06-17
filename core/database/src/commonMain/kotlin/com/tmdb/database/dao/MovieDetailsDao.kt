@@ -10,6 +10,7 @@ import com.tmdb.database.entity.GenreEntity
 import com.tmdb.database.entity.MovieDetailWithRelations
 import com.tmdb.database.entity.MovieDetailsEntity
 import com.tmdb.database.entity.ProductionCompanyEntity
+import com.tmdb.database.entity.ProductionCountryEntity
 import com.tmdb.database.entity.SpokenLanguageEntity
 
 /**
@@ -28,7 +29,7 @@ interface MovieDetailsDao {
     suspend fun insertProductionCompanies(companies: List<ProductionCompanyEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertProductionCountries(countries: List<ProductionCompanyEntity>)
+    suspend fun insertProductionCountries(countries: List<ProductionCountryEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSpokenLanguages(languages: List<SpokenLanguageEntity>)
