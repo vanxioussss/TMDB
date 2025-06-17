@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -82,7 +83,8 @@ fun MovieHomeScreen(
             onValueChange = { onQueryChange(it) },
             modifier = modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(12.dp)
+                .testTag("SearchTextField"),
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             trailingIcon = {
                 if (searchQuery.isNotEmpty()) {
@@ -109,7 +111,12 @@ fun MovieHomeScreen(
 
         when (movieUiState) {
             is MovieUiState.Loading -> {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .testTag("FullScreenLoading"),
+                    contentAlignment = Alignment.Center
+                ) {
                     CircularProgressIndicator()
                 }
             }
