@@ -4,6 +4,8 @@ import com.tmbd.network.di.networkModule
 import com.tmdb.data.datasource.MoviePagingSource
 import com.tmdb.data.repository.MovieDetailsRepositoryImpl
 import com.tmdb.data.repository.MovieRepositoryImpl
+import com.tmdb.data.util.network.AndroidNetworkStatusTracker
+import com.tmdb.data.util.network.NetworkTracker
 import com.tmdb.database.di.databaseModule
 import com.tmdb.domain.repository.MovieDetailsRepository
 import com.tmdb.domain.repository.MovieRepository
@@ -41,6 +43,10 @@ val dataModule =
                 apiService = get(),
                 query = query,
             )
+        }
+
+        factory<NetworkTracker> {
+            AndroidNetworkStatusTracker(get())
         }
     }
 
