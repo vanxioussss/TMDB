@@ -26,7 +26,10 @@ kotlin {
 
         commonTest {
             dependencies {
-                implementation(libs.kotlin.test)
+                implementation(libs.mockk)
+                implementation(libs.bundles.test)
+                implementation(libs.bundles.test.multiplatform)
+                implementation(libs.turbine)
             }
         }
     }
