@@ -22,9 +22,9 @@ import com.tmdb.model.SpokenLanguage
  * on 16,June,2025
  */
 
-private const val BASE_URL = "https://image.tmdb.org/t/p/w"
-const val BIG_SIZE_IMAGE_ADDRESS = "${BASE_URL}780"
-const val SMALL_SIZE_IMAGE_ADDRESS = "${BASE_URL}300"
+private const val BASE_URL = "https://image.tmdb.org/t/p/"
+const val BIG_SIZE_IMAGE_ADDRESS = "${BASE_URL}original"
+const val SMALL_SIZE_IMAGE_ADDRESS = "${BASE_URL}w300"
 
 private fun String.toSmallImageUrl(): String = SMALL_SIZE_IMAGE_ADDRESS.plus(this)
 private fun String.toBigImageUrl(): String = BIG_SIZE_IMAGE_ADDRESS.plus(this)
@@ -57,19 +57,19 @@ fun MovieDetailDto.toModel(): MovieDetail {
         originalTitle = originalTitle,
         overview = overview,
         releaseDate = releaseDate,
-        posterPath = posterPath.toSmallImageUrl(),
-        backdropPath = backdropPath.toBigImageUrl(),
+        posterPath = posterPath?.toBigImageUrl(),
+        backdropPath = backdropPath?.toBigImageUrl(),
         voteAverage = voteAverage,
         runtime = runtime,
         homepage = homepage,
         imdbId = imdbId,
         status = status,
         tagline = tagline,
-        belongsToCollection = belongsToCollectionDto.toModel(),
-        genres = genreDtos.map { it.toModel() },
+        belongsToCollection = belongsToCollectionDto?.toModel(),
+        genres = genres.map { it.toModel() },
         productionCompanies = productionCompanies.map { it.toModel() },
         productionCountries = productionCountries.map { it.toModel() },
-        spokenLanguages = spokenLanguageDtos.map { it.toModel() }
+        spokenLanguages = spokenLanguage.map { it.toModel() }
     )
 }
 
@@ -148,7 +148,7 @@ fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(
     backdropPath = backdropPath ?: "",
     belongsToCollectionDto = belongsToCollection?.toDto() ?: BelongsToCollectionDto(0, "", "", ""),
     budget = 0, // or store if needed
-    genreDtos = genres.toGenreDto(),
+    genres = genres.toGenreDto(),
     homepage = homepage ?: "",
     id = id,
     imdbId = imdbId ?: "",
@@ -163,7 +163,7 @@ fun MovieDetail.toDto(): MovieDetailDto = MovieDetailDto(
     releaseDate = releaseDate ?: "",
     revenue = 0, // optional
     runtime = runtime ?: 0,
-    spokenLanguageDtos = spokenLanguages.toSpokenLanguageDto(),
+    spokenLanguage = spokenLanguages.toSpokenLanguageDto(),
     status = status ?: "",
     tagline = tagline ?: "",
     title = title,

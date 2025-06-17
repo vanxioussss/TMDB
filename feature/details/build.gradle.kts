@@ -21,9 +21,29 @@ kotlin {
                 implementation(libs.navigation.compose)
 
                 implementation(libs.kotlin.stdlib)
-                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.bundles.koin)
+                implementation(libs.bundles.ktor)
+
+                implementation(projects.core.common)
+                implementation(projects.core.domain)
+                implementation(projects.core.model)
+                implementation(projects.core.ui)
 
                 implementation(libs.glide.compose)
+            }
+        }
+
+        commonMain {
+            dependencies {
+                implementation(libs.kotlin.stdlib)
+                implementation(libs.bundles.koin)
+                implementation(libs.bundles.ktor)
+                implementation(libs.paging.common)
+                implementation(libs.paging.compose.common)
+
+                implementation(projects.core.common)
+                implementation(projects.core.domain)
+                implementation(projects.core.model)
             }
         }
     }

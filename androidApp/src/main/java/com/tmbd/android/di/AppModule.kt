@@ -2,6 +2,7 @@ package com.tmbd.android.di
 
 import com.tmdb.BuildConfig
 import com.tmdb.bridge.di.domainModule
+import com.tmdb.details.di.detailsScreenModule
 import com.tmdb.movies.di.homeScreenModule
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -23,5 +24,6 @@ val appModules = listOf(
 )
 
 val featuresModule = listOf(
-    homeScreenModule
+    homeScreenModule,
+    detailsScreenModule
 )

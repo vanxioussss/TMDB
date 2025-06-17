@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.paging.compose.itemKey
 import app.cash.paging.LoadStateError
 import app.cash.paging.LoadStateLoading
@@ -33,6 +34,7 @@ import app.cash.paging.LoadStateNotLoading
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.tmdb.movies.state.MovieUiState
 import com.tmdb.movies.viewmodel.HomeScreenViewModel
+import com.tmdb.navigation.navigateToDetails
 import com.tmdb.ui.AppColorScheme
 import com.tmdb.ui.searchTextFieldColors
 import org.koin.compose.viewmodel.koinViewModel
@@ -44,7 +46,8 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MovieHomeScreenRoute(
     modifier: Modifier = Modifier,
-    homeScreenViewModel: HomeScreenViewModel = koinViewModel()
+    homeScreenViewModel: HomeScreenViewModel = koinViewModel(),
+    navController: NavHostController
 ) {
     val uiState = homeScreenViewModel.movieUiState.collectAsStateWithLifecycle()
     val searchQuery = homeScreenViewModel.searchQuery.collectAsStateWithLifecycle()
@@ -53,7 +56,10 @@ fun MovieHomeScreenRoute(
         modifier = modifier,
         movieUiState = uiState.value,
         searchQuery = searchQuery.value,
-        onQueryChange = { homeScreenViewModel.updateSearchQuery(it) }
+        onQueryChange = { homeScreenViewModel.updateSearchQuery(it) },
+        onMovieClick = { movieId ->
+            navController.navigateToDetails(movieId)
+        }
     )
 }
 
@@ -63,6 +69,7 @@ fun MovieHomeScreen(
     movieUiState: MovieUiState,
     searchQuery: String,
     onQueryChange: (String) -> Unit,
+    onMovieClick: (Long) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -110,7 +117,7 @@ fun MovieHomeScreen(
                 LazyColumn(contentPadding = PaddingValues(16.dp)) {
                     items(movieUiState.data.size) { idx ->
                         val movie = movieUiState.data[idx]
-                        MovieItem(movie = movie)
+                        MovieItem(movie = movie, onMovieClick = onMovieClick)
                     }
                 }
             }
@@ -151,7 +158,7 @@ fun MovieHomeScreen(
                                 pagingData.itemCount,
                                 key = pagingData.itemKey { it.id }) { idx ->
                                 pagingData[idx]?.let { movie ->
-                                    MovieItem(movie = movie)
+                                    MovieItem(movie = movie, onMovieClick = onMovieClick)
                                 }
                             }
 

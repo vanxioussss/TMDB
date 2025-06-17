@@ -2,9 +2,12 @@ package com.tmdb.bridge.di
 
 import com.tmbd.network.di.networkModule
 import com.tmdb.data.datasource.MoviePagingSource
+import com.tmdb.data.repository.MovieDetailsRepositoryImpl
 import com.tmdb.data.repository.MovieRepositoryImpl
 import com.tmdb.database.di.databaseModule
+import com.tmdb.domain.repository.MovieDetailsRepository
 import com.tmdb.domain.repository.MovieRepository
+import com.tmdb.domain.usecases.GetMovieDetailsUseCase
 import com.tmdb.domain.usecases.GetTrendingMoviesUseCase
 import com.tmdb.domain.usecases.SearchMoviesUseCase
 import org.koin.dsl.module
@@ -23,6 +26,13 @@ val dataModule =
             MovieRepositoryImpl(
                 movieDbApiService = get(),
                 trendingMoviesDao = get(),
+            )
+        }
+
+        single<MovieDetailsRepository> {
+            MovieDetailsRepositoryImpl(
+                movieDbApiService = get(),
+                movieDetailsDao = get(),
             )
         }
 
@@ -46,6 +56,12 @@ val domainModule = module {
     factory {
         GetTrendingMoviesUseCase(
             movieRepository = get(),
+        )
+    }
+
+    factory {
+        GetMovieDetailsUseCase(
+            movieDetailsRepository = get(),
         )
     }
 }

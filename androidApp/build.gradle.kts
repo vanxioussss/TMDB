@@ -73,6 +73,7 @@ dependencies {
     implementation(projects.core.ui)
 
     implementation(projects.feature.movies)
+    implementation(projects.feature.details)
 
     implementation(libs.glide.compose)
 }
