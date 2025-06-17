@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+
 plugins {
     alias(libs.plugins.tmdb.kmp.library)
     alias(libs.plugins.jetbrains.compose)
@@ -28,8 +31,23 @@ kotlin {
                 implementation(projects.core.domain)
                 implementation(projects.core.model)
                 implementation(projects.core.ui)
+                implementation(projects.core.testing)
 
                 implementation(libs.glide.compose)
+            }
+        }
+
+        androidTarget {
+            @OptIn(ExperimentalKotlinGradlePluginApi::class)
+            instrumentedTestVariant {
+                sourceSetTree.set(KotlinSourceSetTree.test)
+
+                dependencies {
+                    implementation(libs.compose.ui.test.junit4)
+                    implementation(libs.compose.ui.test.manifest)
+                    implementation(libs.androidx.junit)
+                    implementation(libs.espresso.core)
+                }
             }
         }
 

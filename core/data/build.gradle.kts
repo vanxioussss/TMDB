@@ -13,6 +13,7 @@ kotlin {
                 api(projects.core.network)
                 api(projects.core.database)
                 implementation(projects.core.common)
+                implementation(projects.core.testing)
 
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.kotlinx.datetime)

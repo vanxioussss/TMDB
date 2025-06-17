@@ -28,5 +28,9 @@ internal fun BaseExtension.configureDefaultConfig() {
         targetSdk = 35
         versionCode = 1 // This should be replaced with a dynamic versioning system
         versionName = "1.0.0" // This should be replaced with a dynamic versioning system
+
+        defaultConfig {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
     }
 }

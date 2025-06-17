@@ -27,6 +27,7 @@ sqlite = "2.5.1"
 secrets = "2.0.1"
 pagingCommonAndroid = "3.3.6"
 turbine = "1.2.0"
+espresso = "3.5.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -74,6 +75,9 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glideCompose" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "pagingCommonAndroid" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 
 [bundles]
 test = ["junit", "arc-core-common", "arc-core-runtime", "arc-core-testing", "kotlin-test", "kotlinx-coroutines-test"]
