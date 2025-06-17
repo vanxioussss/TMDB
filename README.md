@@ -145,7 +145,7 @@ development of this application.
   future-proof and team-friendly.
 
   **Single Activity with Navigation Compose** \
-  The app uses a single-activity architecture, with each feature represented by a Fragment. This
+  The app uses a single-activity architecture, with each feature separated into submodules. This
   centralizes navigation and simplifies lifecycle handling across screens.
 
 - 🗄️**Cache Validation Strategy**:
