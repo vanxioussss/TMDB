@@ -48,6 +48,7 @@ import com.tmdb.details.viewmodel.MovieDetailsViewModel
 import com.tmdb.model.MovieDetail
 import com.tmdb.navigation.navigateToHome
 import com.tmdb.ui.AppColorScheme
+import com.tmdb.ui.ErrorBox
 import org.koin.compose.viewmodel.koinViewModel
 
 /**
@@ -118,17 +119,10 @@ fun MovieDetailScreen(
             }
 
             is MovieDetailsUiState.Error -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(AppColorScheme.Background),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Something went wrong: ${uiState.message}",
-                        color = AppColorScheme.PrimaryVariant
-                    )
-                }
+                ErrorBox(
+                    modifier = modifier,
+                    message = uiState.message
+                )
             }
 
             is MovieDetailsUiState.ShowDetails -> {

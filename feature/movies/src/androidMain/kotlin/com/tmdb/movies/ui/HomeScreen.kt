@@ -36,6 +36,7 @@ import com.tmdb.movies.state.MovieUiState
 import com.tmdb.movies.viewmodel.HomeScreenViewModel
 import com.tmdb.navigation.navigateToDetails
 import com.tmdb.ui.AppColorScheme
+import com.tmdb.ui.ErrorBox
 import com.tmdb.ui.searchTextFieldColors
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -141,15 +142,10 @@ fun MovieHomeScreen(
 
                     is LoadStateError -> {
                         // Initial load error
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = refreshState.error.localizedMessage ?: "Unknown error",
-                                color = AppColorScheme.PrimaryVariant
-                            )
-                        }
+                        ErrorBox(
+                            modifier = modifier,
+                            message = refreshState.error.localizedMessage ?: "Unknown error"
+                        )
                     }
 
                     is LoadStateNotLoading -> {
@@ -205,9 +201,10 @@ fun MovieHomeScreen(
             }
 
             is MovieUiState.Error -> {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = movieUiState.message, color = AppColorScheme.PrimaryVariant)
-                }
+                ErrorBox(
+                    modifier = modifier,
+                    message = movieUiState.message
+                )
             }
         }
     }
